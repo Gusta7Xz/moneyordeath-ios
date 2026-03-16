@@ -1,0 +1,62 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Install Capacitor
+        run: |
+          npm install @capacitor/core
+          npm install @capacitor/cli
+          npm install @capacitor/ios
+
+      - name: Initialize Capacitor
+        run: |
+          npx cap init MoneyOrDeath com.moneyordeath.app --web-dir=dist
+
+      - name: Add iOS platform
+        run: |
+          npx cap add ios
+
+      - name: Sync project
+        run: |
+          npx cap sync ios
+
+      - name: Build iOS
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+          -scheme App \
+          -sdk iphoneos \
+          -configuration Release \
+          build
+
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -r ios/App/build/Release-iphoneos/App.app Payload
+          zip -r app.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: MoneyOrDeath-IPA
+          path: app.ipa
