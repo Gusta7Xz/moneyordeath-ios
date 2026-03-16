@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>MoneyOrDeath v5.0</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MoneyOrDeath">
+    <!-- Icone Roxo/Preto Estilizado -->
+    <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/192/000000/skull-and-bones.png">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/192/000000/skull-and-bones.png">
+    <meta name="theme-color" content="#08000a">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              neon: '#ff2db2',
+              dark: '#020002',
+              card: '#08000a',
+              accent: '#160018'
+            },
+            animation: {
+              'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              'pulse-glow': {
+                '0%, 100%': { boxShadow: '0 0 10px #ff2db2' },
+                '50%': { boxShadow: '0 0 25px #ff2db2' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #020002;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .glass {
+        background: rgba(8, 0, 10, 0.85);
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
